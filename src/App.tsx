@@ -1,14 +1,10 @@
-import './App.css'
-import { Grid, GridItem, Show } from '@chakra-ui/react'
-import NavBar from './components/NavBar';
-import GameGrid from './components/gameGrid';
-import apiClient from './services/api-client';
+import { Grid, GridItem, Show } from "@chakra-ui/react";
+import NavBar from "./components/NavBar";
+import GameGrid from "./components/GameGrid";
 
 
 
 function App() {
-
-  apiClient.get("/games")
   
   return (
     <Grid
