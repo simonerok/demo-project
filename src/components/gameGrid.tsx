@@ -5,9 +5,9 @@ import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 
 const GameGrid = () => {
-  const { games, error, isLoading } = useGames();
-  const skeletons = [...Array(20).keys()];
+  const { data: games, error, isLoading } = useGames();
 
+  const skeletons = [...Array(20).keys()];
   return (
     <SimpleGrid
       columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}

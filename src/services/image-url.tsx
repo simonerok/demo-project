@@ -1,7 +1,6 @@
-
-const getCroppedImageUrl = (url: string): string => {
-  if (!url) return '';
-  return url.replace('/media/', '/media/crop/600/400/');
+const getCroppedImageUrl = (url: string | null) => {
+  if (!url) return "";
+  return url.replace("media/games", "media/crop/600/400/games");
 };
 
 export default getCroppedImageUrl;
