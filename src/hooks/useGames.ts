@@ -1,19 +1,17 @@
-// src/hooks/useGames.ts
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import apiClient from "../services/api-client";
 
-
-interface Platform {
+export interface Platform {
   id: number;
   name: string;
   slug: string;
 }
-
 export interface Game {
   id: number;
   name: string;
   background_image: string;
-  parent_platforms: {platform: Platform}[];
+  parent_platforms: { platform: Platform }[];
+  metacritic: number;
 }
 
 interface GamesResponse {
@@ -23,27 +21,20 @@ interface GamesResponse {
 
 const useGames = () => {
   const [games, setGames] = useState<Game[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const fetchGames = async () => {
-      try {
-        const response = await axios.get<GamesResponse>('https://api.rawg.io/api/games', {
-          params: {
-            key: import.meta.env.VITE_API_KEY,
-          },
-        });
-        setGames(response.data.results);
-      } catch (err) {
-        setError(err.message);
-      }
-    };
+    setIsLoading(true);
 
-    fetchGames();
+    apiClient
+      .get<GamesResponse>("/games")
+      .then((response) => setGames(response.data.results))
+      .catch((error) => setError(error.message))
+      .finally(() => setIsLoading(false));
   }, []);
 
-  return { games, error };
+  return { games, error, isLoading };
 };
 
 export default useGames;
-export default Game;

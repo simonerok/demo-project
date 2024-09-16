@@ -20,7 +20,7 @@ interface Platform {
 interface Props {
   platforms: Platform[];
 }
-
+    
 const platformIcons: { [key: string]: JSX.Element } = {
   Xbox: <FaXbox size="24px" />,
   PlayStation: <FaPlaystation size="24px" />,
