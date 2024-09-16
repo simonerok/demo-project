@@ -2,10 +2,18 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-interface Game {
+
+interface Platform {
   id: number;
   name: string;
-  // background_image: string;
+  slug: string;
+}
+
+export interface Game {
+  id: number;
+  name: string;
+  background_image: string;
+  parent_platforms: {platform: Platform}[];
 }
 
 interface GamesResponse {
@@ -38,3 +46,4 @@ const useGames = () => {
 };
 
 export default useGames;
+export default Game;
